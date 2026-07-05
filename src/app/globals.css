@@ -52,6 +52,11 @@
 }
 
 :root {
+  /* Single source of truth for the fixed-navbar clearance. Used by BOTH
+     scroll-margin-top (Lenis/native anchor scrolls) and scroll-padding-top
+     (browser-native fragment navigation: direct #hash loads, back/forward
+     restores) so the two offsets can never drift apart. */
+  --nav-offset: 5.5rem;
   --background: #f5ede0;
   --foreground: #0b0b0c;
   --card: #fff8ee;
@@ -81,6 +86,14 @@
   --sidebar-ring: #f2622e;
 }
 
+/* Kept next to :root (unlayered) so it reliably overrides the 5.5rem default
+   above — a layered override would lose to the unlayered declaration. */
+@media (min-width: 768px) {
+  :root {
+    --nav-offset: 6.5rem;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -90,6 +103,9 @@
      position and causes jank, especially in Safari. */
   html {
     @apply font-sans;
+    /* Safety net for scrolls the Lenis click interceptor never sees:
+       pasting a #hash URL, browser back/forward, find-in-page. */
+    scroll-padding-top: var(--nav-offset);
   }
   body {
     @apply bg-background text-foreground;
@@ -100,12 +116,7 @@
   }
   /* Keeps anchor-linked section headings clear of the fixed navbar (h-20 = 5rem). */
   section[id] {
-    scroll-margin-top: 5.5rem;
-  }
-  @media (min-width: 768px) {
-    section[id] {
-      scroll-margin-top: 6.5rem;
-    }
+    scroll-margin-top: var(--nav-offset);
   }
 }
 

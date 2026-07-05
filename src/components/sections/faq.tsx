@@ -20,7 +20,7 @@ export function FAQ() {
               value={faq.question}
               className="border-b border-ink/10"
             >
-              <AccordionTrigger className="py-6 font-display text-lg text-ink hover:no-underline">
+              <AccordionTrigger className="py-5 text-left font-display text-base text-ink hover:no-underline sm:py-6 sm:text-lg">
                 {faq.question}
               </AccordionTrigger>
               <AccordionContent className="!pb-6 text-base leading-relaxed text-ink/65">

@@ -24,13 +24,13 @@ export function Reviews() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.6 }}
-          className="mt-10 flex flex-col items-center"
+          className="mt-8 flex flex-col items-center sm:mt-10"
         >
           <div className="flex items-baseline gap-1">
-            <span className="font-display text-[6rem] leading-none text-ink sm:text-[7rem]">
+            <span className="font-display text-[4.5rem] leading-none text-ink sm:text-[7rem]">
               {restaurant.googleRating.toFixed(1)}
             </span>
-            <span className="font-display text-2xl text-ink/30">/5</span>
+            <span className="font-display text-xl text-ink/30 sm:text-2xl">/5</span>
           </div>
           {/* True fractional fill — 4.7/5 shows 4.7 stars, not 5. */}
           <div className="relative mt-3" role="img" aria-label={`${restaurant.googleRating.toFixed(1)} von 5 Sternen`}>
@@ -50,14 +50,14 @@ export function Reviews() {
               </div>
             </div>
           </div>
-          <p className="mt-4 max-w-sm text-ink/60">
+          <p className="mt-3 max-w-sm text-sm text-ink/60 sm:mt-4 sm:text-base">
             Durchschnittliche Google-Bewertung von Gästen in Friedrichshain.
           </p>
           <a
             href={restaurant.links.googleMaps}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-orange hover:text-mustard transition-colors"
+            className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-orange hover:text-mustard transition-colors sm:mt-6"
           >
             Alle Bewertungen auf Google ansehen →
           </a>

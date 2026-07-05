@@ -106,8 +106,10 @@ export function DeliveryPlatforms() {
           </div>
         </motion.div>
 
-        {/* Secondary channels */}
-        <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {/* Secondary channels. Mobile: three compact "auch verfügbar über"
+            chips side by side (name + short CTA, no description) so the
+            section stays short. sm+ keeps the full descriptive cards. */}
+        <div className="mt-3 grid grid-cols-3 gap-2 sm:mt-4 sm:gap-4">
           {secondary.map((platform, i) => (
             <motion.article
               key={platform.id}
@@ -116,7 +118,7 @@ export function DeliveryPlatforms() {
               viewport={{ once: true, margin: "-10%" }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
               className={cn(
-                "group flex flex-col justify-between gap-8 rounded-3xl p-7",
+                "group flex flex-col justify-between gap-4 rounded-2xl p-4 sm:gap-8 sm:rounded-3xl sm:p-7",
                 platform.verified
                   ? "border border-ink/10 bg-warm-white transition-shadow duration-300 hover:shadow-[0_20px_40px_-24px_rgba(11,11,12,0.3)]"
                   : "border border-dashed border-ink/20"
@@ -130,7 +132,7 @@ export function DeliveryPlatforms() {
                 />
                 <h3
                   className={cn(
-                    "mt-5 font-display text-2xl leading-none",
+                    "mt-3 font-display text-base leading-none sm:mt-5 sm:text-2xl",
                     platform.verified ? "text-ink" : "text-ink/45"
                   )}
                 >
@@ -138,7 +140,7 @@ export function DeliveryPlatforms() {
                 </h3>
                 <p
                   className={cn(
-                    "mt-3 text-sm leading-relaxed",
+                    "hidden text-sm leading-relaxed sm:mt-3 sm:block",
                     platform.verified ? "text-ink/60" : "text-ink/40"
                   )}
                 >
@@ -151,16 +153,19 @@ export function DeliveryPlatforms() {
                   href={platform.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wide text-ink transition-colors duration-300 group-hover:text-orange"
+                  className="inline-flex items-center gap-1 text-xs font-semibold uppercase tracking-wide text-ink transition-colors duration-300 group-hover:text-orange sm:gap-2 sm:text-sm"
                 >
-                  {platform.cta}
+                  {/* Full CTA copy needs more width than a third of a phone
+                      screen — mobile gets a short generic label instead. */}
+                  <span className="sm:hidden">Öffnen</span>
+                  <span className="hidden sm:inline">{platform.cta}</span>
                   <ArrowUpRight
                     size={15}
                     className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
                   />
                 </a>
               ) : (
-                <span className="inline-flex w-fit items-center rounded-full border border-ink/15 px-4 py-1.5 text-xs font-semibold uppercase tracking-wide text-ink/45">
+                <span className="inline-flex w-fit items-center rounded-full border border-ink/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-ink/45 sm:px-4 sm:py-1.5 sm:text-xs">
                   Bald verfügbar
                 </span>
               )}

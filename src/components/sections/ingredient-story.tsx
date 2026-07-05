@@ -110,6 +110,36 @@ const LAYERS: Layer[] = [
   },
 ];
 
+// Mobile-only condensation of the 7-layer diagram into 4 strong points.
+// Reuses the layer gradients as color swatches so both variants share the
+// same visual language. Copy is condensed from LAYERS above — no new claims.
+const MOBILE_POINTS = [
+  {
+    id: "bun",
+    label: "Bio Bun",
+    description: "Weiches Bio-Brot, frisch aufgebacken für den perfekten Biss.",
+    swatch: "linear-gradient(to right, #eab269, #b87c3c)",
+  },
+  {
+    id: "sauce",
+    label: "Hausgemachte Sauce",
+    description: "Eigene Rezeptur — jeden Tag frisch angerührt.",
+    swatch: "linear-gradient(to right, #eeda63, #d3b52f)",
+  },
+  {
+    id: "beef",
+    label: "Bio Beef",
+    description: "Regionales, bio-zertifiziertes Rindfleisch — der Kern jedes Burgers.",
+    swatch: "linear-gradient(to right, #6b4530, #361f0e)",
+  },
+  {
+    id: "toppings",
+    label: "Frisch belegt",
+    description: "Cheddar, Saisonsalat und Tomate — geschnitten, sobald du bestellst.",
+    swatch: "linear-gradient(to right, #84b354, #5c8a33)",
+  },
+] as const;
+
 export function IngredientStory() {
   return (
     <section id="zubereitung" className="relative overflow-hidden bg-charcoal py-16 md:py-24 lg:py-28">
@@ -121,15 +151,55 @@ export function IngredientStory() {
       </span>
 
       <div className="container-px relative">
-        <SectionHeading
-          eyebrow="Jede Schicht zählt"
-          title="So bauen wir jeden Burger"
-          description="Sieben Schichten, kein Füllstoff — frisch zusammengesetzt, sobald deine Bestellung reinkommt."
-          align="center"
-          dark
-        />
+        {/* Mobile heading — the mobile variant shows 4 condensed points, so
+            "Sieben Schichten" would contradict what's on screen. */}
+        <div className="md:hidden">
+          <SectionHeading
+            eyebrow="Jede Schicht zählt"
+            title="So bauen wir jeden Burger"
+            description="Bio-Zutaten, kein Füllstoff — frisch zusammengesetzt, sobald deine Bestellung reinkommt."
+            align="center"
+            dark
+          />
+        </div>
+        <div className="hidden md:block">
+          <SectionHeading
+            eyebrow="Jede Schicht zählt"
+            title="So bauen wir jeden Burger"
+            description="Sieben Schichten, kein Füllstoff — frisch zusammengesetzt, sobald deine Bestellung reinkommt."
+            align="center"
+            dark
+          />
+        </div>
 
-        <div className="mx-auto mt-10 flex max-w-4xl flex-col gap-2 md:mt-14 md:gap-2.5">
+        {/* Mobile: 2×2 grid of premium quick-scan cards instead of the
+            7-layer exploded diagram (which stays md:+, unchanged). */}
+        <div className="mx-auto mt-8 grid max-w-md grid-cols-2 gap-3 md:hidden">
+          {MOBILE_POINTS.map((point, i) => (
+            <motion.div
+              key={point.id}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-10%" }}
+              transition={{ duration: 0.5, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-2xl border border-warm-white/10 bg-ink/40 p-4"
+            >
+              <span
+                aria-hidden
+                className="block h-1.5 w-10 rounded-full"
+                style={{ backgroundImage: point.swatch }}
+              />
+              <p className="mt-3 font-display text-lg leading-tight text-warm-white">
+                {point.label}
+              </p>
+              <p className="mt-1.5 text-xs leading-relaxed text-warm-white/55">
+                {point.description}
+              </p>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mx-auto mt-10 hidden max-w-4xl flex-col gap-2 md:mt-14 md:flex md:gap-2.5">
           {LAYERS.map((layer, i) => (
             <motion.div
               key={layer.id}

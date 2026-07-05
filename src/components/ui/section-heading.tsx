@@ -46,7 +46,9 @@ export function SectionHeading({
         viewport={{ once: true, margin: "-10%" }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={cn(
-          "font-display text-4xl sm:text-5xl md:text-6xl leading-[0.95] tracking-tight",
+          // Mobile gets a slightly smaller size with looser leading — Anton at
+          // text-4xl/0.95 reads cramped on 375–414px screens with long titles.
+          "font-display text-[2rem] leading-[1.06] sm:text-5xl sm:leading-[0.95] md:text-6xl tracking-tight",
           dark ? "text-warm-white" : "text-ink"
         )}
       >
@@ -59,7 +61,7 @@ export function SectionHeading({
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className={cn(
-            "mt-5 text-base md:text-lg leading-relaxed",
+            "mt-4 md:mt-5 text-base md:text-lg leading-relaxed",
             dark ? "text-warm-white/70" : "text-ink/70"
           )}
         >

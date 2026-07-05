@@ -42,7 +42,10 @@ export function SignatureBurgers() {
           </CtaButton>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:auto-rows-[13rem] md:mt-12 lg:auto-rows-[16rem]">
+        {/* Mobile: flagship full-width, the other six in a compact 2-col grid
+            (name + price + image — quick to scan, no long scroll).
+            sm+ keeps the hand-tuned bento grid untouched. */}
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-6 sm:auto-rows-[13rem] md:mt-12 lg:auto-rows-[16rem]">
           {signatureBurgers.map((item, i) => {
             const featured = i === 0;
             return (
@@ -53,8 +56,10 @@ export function SignatureBurgers() {
                 viewport={{ once: true, margin: "-10%" }}
                 transition={{ duration: 0.55, delay: (i % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
                 className={cn(
-                  "group relative aspect-[4/3] overflow-hidden rounded-3xl bg-charcoal sm:aspect-auto",
-                  featured && "aspect-square",
+                  "group relative overflow-hidden rounded-2xl bg-charcoal sm:rounded-3xl sm:aspect-auto",
+                  // col-span-2 is mobile-only in effect: at sm+ PLACEMENT's
+                  // explicit col-start/col-end longhands override the span.
+                  featured ? "col-span-2 aspect-[4/3]" : "aspect-square",
                   PLACEMENT[i]
                 )}
               >
@@ -72,18 +77,18 @@ export function SignatureBurgers() {
                   {item.tags?.map((tag) => (
                     <span
                       key={tag}
-                      className="absolute left-4 top-4 rounded-full bg-orange px-3 py-1 text-[11px] font-semibold uppercase tracking-wide text-warm-white"
+                      className="absolute left-3 top-3 rounded-full bg-orange px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-warm-white sm:left-4 sm:top-4 sm:px-3 sm:py-1 sm:text-[11px]"
                     >
                       {tag}
                     </span>
                   ))}
 
-                  <div className="absolute inset-x-0 bottom-0 p-6">
-                    <div className="flex items-start justify-between gap-3">
+                  <div className={cn("absolute inset-x-0 bottom-0", featured ? "p-5 sm:p-6" : "p-3.5 sm:p-6")}>
+                    <div className="flex items-start justify-between gap-2 sm:gap-3">
                       <h3
                         className={cn(
                           "font-display leading-tight text-warm-white",
-                          featured ? "text-3xl sm:text-4xl" : "text-xl"
+                          featured ? "text-3xl sm:text-4xl" : "text-base sm:text-xl"
                         )}
                       >
                         {item.name}
@@ -91,16 +96,20 @@ export function SignatureBurgers() {
                       <span
                         className={cn(
                           "shrink-0 font-display text-mustard",
-                          featured ? "text-2xl" : "text-lg"
+                          featured ? "text-2xl" : "text-base sm:text-lg"
                         )}
                       >
                         {item.price}
                       </span>
                     </div>
+                    {/* Non-featured cards drop the description on mobile —
+                        name + price + photo is enough to scan quickly. */}
                     <p
                       className={cn(
-                        "mt-3 leading-relaxed text-warm-white/60",
-                        featured ? "max-w-md text-sm sm:text-base" : "text-sm line-clamp-2"
+                        "leading-relaxed text-warm-white/60",
+                        featured
+                          ? "mt-2 max-w-md text-sm sm:mt-3 sm:text-base"
+                          : "hidden sm:mt-3 sm:line-clamp-2 sm:text-sm"
                       )}
                     >
                       {item.description}

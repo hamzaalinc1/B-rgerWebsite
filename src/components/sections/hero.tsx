@@ -33,13 +33,27 @@ export function Hero() {
         BRGRS
       </motion.span>
 
-      <div className="container-px relative z-10 grid w-full grid-cols-1 items-center gap-12 py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:py-0">
-        <div>
+      <div className="container-px relative z-10 grid w-full grid-cols-1 items-center gap-8 py-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-8 lg:py-0">
+        {/* Mobile-only certification badge: on small screens the reading order
+            is badge → image → headline → CTAs, so the badge lives outside the
+            text column. Desktop keeps its own copy inside the column below. */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="inline-flex items-center gap-2 justify-self-start rounded-full border border-warm-white/15 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-warm-white/70 lg:hidden"
+        >
+          {restaurant.certification}
+        </motion.p>
+
+        {/* order-last pushes the text below the image on mobile only;
+            lg:order-none restores the approved desktop text-left layout. */}
+        <div className="order-last lg:order-none">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-warm-white/15 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-warm-white/70"
+            className="mb-6 hidden items-center gap-2 rounded-full border border-warm-white/15 px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-warm-white/70 lg:inline-flex"
           >
             {restaurant.certification}
           </motion.p>
@@ -67,7 +81,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
-            className="mt-8 max-w-md text-lg leading-relaxed text-warm-white/70"
+            className="mt-5 max-w-md text-lg leading-relaxed text-warm-white/70 lg:mt-8"
           >
             Handgemachte Burger aus bio-zertifiziertem Rindfleisch, frisch belegt
             an drei Standorten in Berlin. Kein Kompromiss, keine Abkürzung — nur ehrliches Handwerk.
@@ -77,7 +91,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.85 }}
-            className="mt-10 flex flex-wrap items-center gap-4"
+            className="mt-7 flex flex-wrap items-center gap-4 lg:mt-10"
           >
             <CtaButton href="#lieferung">Jetzt bestellen</CtaButton>
             <CtaButton href="#speisekarte" variant="outline">
@@ -90,7 +104,7 @@ export function Hero() {
           initial={{ opacity: 0, scale: 0.92, rotate: -2 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: easeOut }}
-          className="relative mx-auto aspect-[4/5] w-full max-w-md lg:-mr-6 lg:max-w-none xl:-mr-16"
+          className="relative mx-auto aspect-[4/3] w-full max-w-md lg:-mr-6 lg:aspect-[4/5] lg:max-w-none xl:-mr-16"
         >
           <div className="absolute inset-0 rounded-[2.5rem] bg-gradient-to-t from-ink via-transparent to-transparent z-10" />
           <Image
@@ -106,7 +120,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 1, ease: easeOut }}
-            className="absolute -bottom-6 -left-6 z-20 h-28 w-28 rounded-full bg-ink/95 text-warm-white shadow-xl sm:h-32 sm:w-32"
+            className="absolute -bottom-4 -left-4 z-20 h-20 w-20 rounded-full bg-ink/95 text-warm-white shadow-xl sm:-bottom-6 sm:-left-6 sm:h-32 sm:w-32"
           >
             <BioSeal className="h-full w-full p-3" />
           </motion.div>
@@ -118,7 +132,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.4, duration: 0.6 }}
-        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-warm-white/50"
+        className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 flex-col items-center gap-2 text-warm-white/50 md:flex"
         aria-label="Nach unten scrollen"
       >
         <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>

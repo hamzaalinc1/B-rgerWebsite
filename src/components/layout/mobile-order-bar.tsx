@@ -30,8 +30,8 @@ export function MobileOrderBar() {
     <div
       aria-hidden={!visible}
       className={cn(
-        "fixed inset-x-0 bottom-0 z-40 border-t border-warm-white/10 bg-ink/95 px-4 pt-3 transition-transform duration-300 ease-out lg:hidden",
-        "pb-[calc(0.75rem+env(safe-area-inset-bottom))]",
+        "fixed inset-x-0 bottom-0 z-40 border-t border-warm-white/10 bg-ink/95 px-4 pt-2 transition-transform duration-300 ease-out lg:hidden",
+        "pb-[calc(0.5rem+env(safe-area-inset-bottom))]",
         visible ? "translate-y-0" : "pointer-events-none translate-y-full"
       )}
     >
@@ -40,10 +40,12 @@ export function MobileOrderBar() {
         target="_blank"
         rel="noopener noreferrer"
         tabIndex={visible ? 0 : -1}
-        className="flex w-full items-center justify-center gap-2 rounded-full bg-orange py-3.5 text-sm font-semibold uppercase tracking-wide text-warm-white transition-transform active:scale-[0.98]"
+        // min-h-11 (44px) keeps the tap target at the accessibility minimum
+        // even though the visual padding is tighter than before.
+        className="flex min-h-11 w-full items-center justify-center gap-1.5 rounded-full bg-orange py-2.5 text-sm font-semibold uppercase tracking-wide text-warm-white transition-transform active:scale-[0.98]"
       >
         Jetzt bestellen
-        <ArrowUpRight size={16} />
+        <ArrowUpRight size={15} />
       </a>
     </div>
   );

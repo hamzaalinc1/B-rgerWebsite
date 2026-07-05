@@ -341,15 +341,17 @@ export const faqs = [
 // curated, on-theme stock placeholders (grill/patty/ingredients/hands),
 // not meant to represent this specific location. Rendered as a uniform
 // square grid (see gallery.tsx), so no size/span metadata is needed.
+// Array order = display order (2-col mobile / 4-col desktop grid). Strongest,
+// most appetizing shots lead; the most generic-looking one (04) sits last.
 export const galleryImages = [
+  { src: "/images/gallery/07-holding2.jpg", alt: "Burger mit Sesam-Bun in der Hand" },
   { src: "/images/gallery/01-grillfire.jpg", alt: "Offene Flamme auf dem Grill" },
   { src: "/images/gallery/02-holding.jpg", alt: "Burger wird in die Kamera gehalten" },
-  { src: "/images/gallery/03-bun-texture.jpg", alt: "Nahaufnahme eines Sesam-Bio-Buns" },
-  { src: "/images/gallery/04-patty-grill.jpg", alt: "Bio Beef Patty frisch vom Grill" },
   { src: "/images/gallery/05-fries.jpg", alt: "Knusprige Pommes in Nahaufnahme" },
-  { src: "/images/gallery/06-onion-alt.jpg", alt: "Hausgemachte Onion Rings mit Sweet-Chili-Sauce" },
-  { src: "/images/gallery/07-holding2.jpg", alt: "Burger mit Sesam-Bun in der Hand" },
+  { src: "/images/gallery/03-bun-texture.jpg", alt: "Nahaufnahme eines Sesam-Bio-Buns" },
   { src: "/images/gallery/08-tables.jpg", alt: "Cheese Fries neben einem Bacon Burger" },
+  { src: "/images/gallery/06-onion-alt.jpg", alt: "Hausgemachte Onion Rings mit Sweet-Chili-Sauce" },
+  { src: "/images/gallery/04-patty-grill.jpg", alt: "Bio Beef Patty frisch vom Grill" },
 ] as const;
 
 export type CustomerQuote = {
