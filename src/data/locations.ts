@@ -7,37 +7,46 @@ export type RestaurantLocation = {
    */
   slug: string;
   district: string;
+  /** Confirmed public address. All three are real, operating locations. */
+  address: string;
   /**
-   * Only `true` for locations with confirmed, published address + hours.
-   * Unverified locations render as "In Vorbereitung" — never with invented
-   * address/hours data.
+   * The original Friedrichshain store — the only one with full on-page
+   * details (hours table, map embed) in the #standort section.
    */
-  verified: boolean;
-  address?: string;
-  /** Short summary line, e.g. "Mo–Do 11:30–21:45 · Fr–So 11:30–22:45". */
+  flagship?: boolean;
+  /**
+   * Confirmed opening hours summary. Deliberately optional: an address can
+   * be verified while hours are not. When absent the UI shows
+   * "Öffnungszeiten folgen" — never invented times.
+   */
   hoursSummary?: string;
-  mapsHref?: string;
+  mapsHref: string;
 };
+
+// Live Google Maps search link derived from the real address — same URL
+// pattern as restaurant.links.googleMaps.
+const mapsSearch = (query: string) =>
+  `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(query)}`;
 
 export const locations: RestaurantLocation[] = [
   {
     slug: "friedrichshain",
     district: "Friedrichshain",
-    verified: true,
     address: restaurant.address.full,
+    flagship: true,
     hoursSummary: "Mo–Do 11:30–21:45 · Fr–So 11:30–22:45",
     mapsHref: restaurant.links.googleMaps,
   },
   {
     slug: "mitte",
     district: "Mitte",
-    verified: false,
-    // TODO: add real address/hours once confirmed
+    address: "Brückenstraße 1A", // TODO: add zip + opening hours once confirmed
+    mapsHref: mapsSearch("BRGRS Brückenstraße 1A Berlin"),
   },
   {
     slug: "prenzlauer-berg",
     district: "Prenzlauer Berg",
-    verified: false,
-    // TODO: add real address/hours once confirmed
+    address: "Greifswalder Straße 37", // TODO: add zip + opening hours once confirmed
+    mapsHref: mapsSearch("BRGRS Greifswalder Straße 37 Berlin"),
   },
 ];

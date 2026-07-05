@@ -50,7 +50,7 @@ export function Footer() {
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-warm-white/60">
               Handgemachte Burger aus bio-zertifiziertem Rindfleisch (DE-Öko-006) —
-              frisch zubereitet in {restaurant.district}, Berlin.
+              dreimal in Berlin: Friedrichshain, Mitte und Prenzlauer Berg.
             </p>
             <a
               href={restaurant.links.instagram}
@@ -83,7 +83,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-warm-white/50">
-              Kontakt & Öffnungszeiten
+              Unser Original · {restaurant.district}
             </h3>
             <address className="mt-5 not-italic text-sm leading-relaxed text-warm-white/75">
               {restaurant.address.street}

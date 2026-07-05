@@ -15,14 +15,14 @@ const body = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "BRGRS. — Bio Beef Burger in Friedrichshain, Berlin",
+  title: "BRGRS. — Bio Beef Burger in Berlin",
   description:
-    "Handgemachte Burger aus bio-zertifiziertem Rindfleisch (DE-Öko-006), frisch zubereitet in der Pettenkoferstraße, Berlin-Friedrichshain. Jetzt bestellen über Lieferando, Uber Eats oder Wolt.",
+    "Handgemachte Burger aus bio-zertifiziertem Rindfleisch (DE-Öko-006) — dreimal in Berlin: Friedrichshain, Mitte und Prenzlauer Berg. Jetzt bestellen über Lieferando, Uber Eats oder Wolt.",
   metadataBase: new URL("https://www.brgrsbrgrs-organicburgers.de"),
   openGraph: {
-    title: "BRGRS. — Bio Beef Burger in Friedrichshain, Berlin",
+    title: "BRGRS. — Bio Beef Burger in Berlin",
     description:
-      "Handgemachte Burger aus bio-zertifiziertem Rindfleisch, frisch zubereitet in Berlin-Friedrichshain.",
+      "Handgemachte Burger aus bio-zertifiziertem Rindfleisch — dreimal in Berlin: Friedrichshain, Mitte und Prenzlauer Berg.",
     locale: "de_DE",
     type: "website",
   },

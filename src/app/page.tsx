@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { MobileOrderBar } from "@/components/layout/mobile-order-bar";
 import { Hero } from "@/components/sections/hero";
 import { TrustBar } from "@/components/sections/trust-bar";
 import { WhyBrgrs } from "@/components/sections/why-brgrs";
@@ -34,6 +35,7 @@ export default function Home() {
         <Location />
       </main>
       <Footer />
+      <MobileOrderBar />
     </>
   );
 }

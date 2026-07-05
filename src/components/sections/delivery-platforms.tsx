@@ -1,13 +1,18 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { CtaButton } from "@/components/ui/cta-button";
-import { deliveryPlatforms, restaurant } from "@/data/restaurant";
+import { deliveryPlatforms, menu, restaurant } from "@/data/restaurant";
 import { cn } from "@/lib/utils";
 
 const [featured, ...secondary] = deliveryPlatforms;
+
+// Real menu categories — shown as chips in the featured panel so the card
+// reads "food you can order right now", not an abstract platform tile.
+const menuCategories = menu.map((category) => category.title);
 
 const deliveryNames = deliveryPlatforms
   .filter((p) => p.verified && p.id !== "pickup")
@@ -41,20 +46,14 @@ export function DeliveryPlatforms() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-10%" }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="relative mt-10 overflow-hidden rounded-3xl bg-ink p-8 md:mt-14 md:p-12"
+          className="relative mt-10 overflow-hidden rounded-3xl bg-ink md:mt-14"
         >
-          <div className="pointer-events-none absolute -right-32 -top-40 h-[30rem] w-[30rem] bg-[radial-gradient(circle_closest-side,rgba(242,98,46,0.22),transparent)]" />
-          <span
-            aria-hidden
-            className="pointer-events-none absolute -bottom-8 right-4 select-none font-display text-[8rem] leading-none text-warm-white/[0.04] md:text-[11rem]"
-          >
-            01
-          </span>
+          <div className="pointer-events-none absolute -left-32 -top-40 z-10 h-[30rem] w-[30rem] bg-[radial-gradient(circle_closest-side,rgba(242,98,46,0.18),transparent)]" />
 
-          <div className="relative flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
-            <div>
+          <div className="relative grid md:grid-cols-[1.05fr_0.95fr]">
+            <div className="relative z-10 p-8 md:p-12">
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-mustard">
-                Unser Hauptkanal
+                Empfohlen — der schnellste Weg
               </p>
               <h3 className="mt-3 font-display text-4xl leading-none text-warm-white md:text-6xl">
                 {featured.name}
@@ -62,22 +61,48 @@ export function DeliveryPlatforms() {
               <p className="mt-4 max-w-md leading-relaxed text-warm-white/65">
                 {featured.description}
               </p>
+
+              <ul className="mt-6 flex max-w-md flex-wrap gap-2">
+                {menuCategories.map((category) => (
+                  <li
+                    key={category}
+                    className="rounded-full border border-warm-white/15 px-3 py-1 text-xs font-medium text-warm-white/70"
+                  >
+                    {category}
+                  </li>
+                ))}
+              </ul>
+
+              <div className="mt-9">
+                {featured.verified ? (
+                  <CtaButton
+                    href={featured.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {featured.cta}
+                    <ArrowUpRight size={16} />
+                  </CtaButton>
+                ) : (
+                  <span className="inline-flex items-center rounded-full border border-warm-white/25 px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-warm-white/50">
+                    Bald verfügbar
+                  </span>
+                )}
+              </div>
             </div>
-            {featured.verified ? (
-              <CtaButton
-                href={featured.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="shrink-0"
-              >
-                {featured.cta}
-                <ArrowUpRight size={16} />
-              </CtaButton>
-            ) : (
-              <span className="inline-flex shrink-0 items-center rounded-full border border-warm-white/25 px-6 py-3.5 text-sm font-semibold uppercase tracking-wide text-warm-white/50">
-                Bald verfügbar
-              </span>
-            )}
+
+            {/* Real product photo — the panel should make you hungry, not
+                remind you of a pricing table. */}
+            <div className="relative order-first min-h-[14rem] md:order-none md:min-h-0">
+              <Image
+                src="/images/menu/brgrs-flagship.jpg"
+                alt="Brgrs Brgrs Burger — unser Signature Burger"
+                fill
+                sizes="(min-width: 768px) 45vw, 100vw"
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/10 to-transparent md:bg-gradient-to-r md:from-ink md:via-ink/25 md:to-transparent" />
+            </div>
           </div>
         </motion.div>
 

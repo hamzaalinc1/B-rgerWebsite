@@ -330,23 +330,26 @@ export const faqs = [
   },
   {
     question: "Wo genau befindet ihr euch?",
+    // Addresses inline (not imported from locations.ts) to avoid a circular
+    // import — locations.ts already imports this file.
     answer:
-      `In der ${restaurant.address.full}, mitten in Friedrichshain.`,
+      `Dreimal in Berlin: unser Original in der ${restaurant.address.full} (Friedrichshain), außerdem in der Brückenstraße 1A (Mitte) und der Greifswalder Straße 37 (Prenzlauer Berg).`,
   },
 ] as const;
 
 // TODO: swap for real restaurant photography when available — these are
 // curated, on-theme stock placeholders (grill/patty/ingredients/hands),
-// not meant to represent this specific location.
+// not meant to represent this specific location. Rendered as a uniform
+// square grid (see gallery.tsx), so no size/span metadata is needed.
 export const galleryImages = [
-  { src: "/images/gallery/01-grillfire.jpg", alt: "Offene Flamme auf dem Grill", size: "wide" },
-  { src: "/images/gallery/02-holding.jpg", alt: "Burger wird in die Kamera gehalten", size: "tall" },
-  { src: "/images/gallery/03-bun-texture.jpg", alt: "Nahaufnahme eines Sesam-Bio-Buns", size: "normal" },
-  { src: "/images/gallery/04-patty-grill.jpg", alt: "Bio Beef Patty frisch vom Grill", size: "wide" },
-  { src: "/images/gallery/05-fries.jpg", alt: "Knusprige Pommes in Nahaufnahme", size: "tall" },
-  { src: "/images/gallery/06-onion-alt.jpg", alt: "Hausgemachte Onion Rings mit Sweet-Chili-Sauce", size: "normal" },
-  { src: "/images/gallery/07-holding2.jpg", alt: "Burger mit Sesam-Bun in der Hand", size: "tall" },
-  { src: "/images/gallery/08-tables.jpg", alt: "Cheese Fries neben einem Bacon Burger", size: "wide" },
+  { src: "/images/gallery/01-grillfire.jpg", alt: "Offene Flamme auf dem Grill" },
+  { src: "/images/gallery/02-holding.jpg", alt: "Burger wird in die Kamera gehalten" },
+  { src: "/images/gallery/03-bun-texture.jpg", alt: "Nahaufnahme eines Sesam-Bio-Buns" },
+  { src: "/images/gallery/04-patty-grill.jpg", alt: "Bio Beef Patty frisch vom Grill" },
+  { src: "/images/gallery/05-fries.jpg", alt: "Knusprige Pommes in Nahaufnahme" },
+  { src: "/images/gallery/06-onion-alt.jpg", alt: "Hausgemachte Onion Rings mit Sweet-Chili-Sauce" },
+  { src: "/images/gallery/07-holding2.jpg", alt: "Burger mit Sesam-Bun in der Hand" },
+  { src: "/images/gallery/08-tables.jpg", alt: "Cheese Fries neben einem Bacon Burger" },
 ] as const;
 
 export type CustomerQuote = {

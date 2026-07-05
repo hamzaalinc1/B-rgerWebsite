@@ -11,8 +11,8 @@ export function Location() {
     <section id="standort" className="relative border-t border-warm-white/10 bg-ink py-16 md:py-24 lg:py-28">
       <div className="container-px">
         <SectionHeading
-          eyebrow="Friedrichshain"
-          title="Finde uns in der Pettenkoferstraße"
+          eyebrow="Unser Original · Friedrichshain"
+          title="Wo alles angefangen hat"
           dark
         />
 
@@ -29,7 +29,10 @@ export function Location() {
               src={restaurant.links.googleMapsEmbed}
               width="100%"
               height="100%"
-              style={{ border: 0, filter: "grayscale(0.3) contrast(1.1)" }}
+              // No CSS filter on the iframe: filtering an iframe makes Safari
+              // rasterize + re-composite the entire embedded map (tiles, WebGL
+              // layers) through the filter chain — expensive and a crash risk.
+              style={{ border: 0 }}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
             />

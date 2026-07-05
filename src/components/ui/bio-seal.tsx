@@ -1,16 +1,16 @@
-"use client";
-
-import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
+// The rotation is a pure CSS animation (Tailwind's built-in `spin` keyframes,
+// slowed down) instead of the previous Framer Motion `animate={{ rotate: 360 }}`
+// loop. A JS-driven infinite transform keeps the main thread busy for the whole
+// session and was a prime suspect for Safari's "this webpage was reloaded"
+// memory kills — CSS transforms run on the compositor instead.
 export function BioSeal({ className }: { className?: string }) {
   return (
     <div className={cn("relative flex items-center justify-center", className)}>
-      <motion.svg
+      <svg
         viewBox="0 0 200 200"
-        className="h-full w-full"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+        className="h-full w-full animate-[spin_26s_linear_infinite] motion-reduce:animate-none"
       >
         <defs>
           <path
@@ -24,7 +24,7 @@ export function BioSeal({ className }: { className?: string }) {
             BIO ZERTIFIZIERT · DE-ÖKO-006 · REGIONALES RINDFLEISCH ·
           </textPath>
         </text>
-      </motion.svg>
+      </svg>
       <span className="absolute font-display text-lg leading-none">BIO.</span>
     </div>
   );

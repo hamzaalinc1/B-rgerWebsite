@@ -36,8 +36,12 @@ export function Navbar() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
+        // No backdrop-blur here: backdrop-filter on a fixed, always-visible
+        // element forces Safari to re-blur the page on every scroll frame for
+        // the entire session (GPU memory pressure → tab reloads). A near-opaque
+        // ink background reads almost identically at a fraction of the cost.
         scrolled
-          ? "bg-ink/80 backdrop-blur-md shadow-[0_1px_0_0_rgba(255,255,255,0.08)]"
+          ? "bg-ink/95 shadow-[0_1px_0_0_rgba(255,255,255,0.08)]"
           : "bg-transparent"
       )}
     >

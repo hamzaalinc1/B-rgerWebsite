@@ -70,7 +70,7 @@ export function Hero() {
             className="mt-8 max-w-md text-lg leading-relaxed text-warm-white/70"
           >
             Handgemachte Burger aus bio-zertifiziertem Rindfleisch, frisch belegt
-            in {restaurant.district}. Kein Kompromiss, keine Abkürzung — nur ehrliches Handwerk.
+            an drei Standorten in Berlin. Kein Kompromiss, keine Abkürzung — nur ehrliches Handwerk.
           </motion.p>
 
           <motion.div
@@ -106,7 +106,7 @@ export function Hero() {
             initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.7, delay: 1, ease: easeOut }}
-            className="absolute -bottom-6 -left-6 z-20 h-28 w-28 rounded-full bg-ink/90 text-warm-white shadow-xl backdrop-blur sm:h-32 sm:w-32"
+            className="absolute -bottom-6 -left-6 z-20 h-28 w-28 rounded-full bg-ink/95 text-warm-white shadow-xl sm:h-32 sm:w-32"
           >
             <BioSeal className="h-full w-full p-3" />
           </motion.div>
@@ -122,12 +122,11 @@ export function Hero() {
         aria-label="Nach unten scrollen"
       >
         <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>
-        <motion.span
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
-        >
+        {/* CSS keyframes (globals.css) instead of an infinite Framer loop —
+            keeps the main thread idle. See BioSeal for the same reasoning. */}
+        <span className="animate-[scroll-hint_1.6s_ease-in-out_infinite] motion-reduce:animate-none">
           <ChevronDown size={18} />
-        </motion.span>
+        </span>
       </motion.a>
     </section>
   );

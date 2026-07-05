@@ -9,6 +9,14 @@ export function SmoothScrollProvider({ children }: { children: React.ReactNode }
     // browser's native (instant) jump, which respects scroll-margin-top.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    // Touch-first devices: skip Lenis entirely. Lenis doesn't smooth native
+    // touch scrolling anyway (smoothTouch is off), so on phones/tablets it was
+    // pure overhead — a permanent rAF loop competing with Safari's compositor
+    // for the whole session, and a likely contributor to iOS Safari's
+    // "webpage was reloaded" memory kills. Anchor clicks fall back to the
+    // native jump, which respects the same scroll-margin-top offsets.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const lenis = new Lenis({
       duration: 1.1,
       easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

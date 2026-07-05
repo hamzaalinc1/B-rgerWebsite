@@ -124,6 +124,18 @@
   }
 }
 
+/* Gentle vertical bounce for the hero scroll hint — CSS instead of a
+   JS-driven Framer loop so the main thread stays idle. */
+@keyframes scroll-hint {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
